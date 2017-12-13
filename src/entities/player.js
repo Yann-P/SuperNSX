@@ -25,10 +25,10 @@ class Player extends Phaser.Sprite {
         }
     }
 
-    die(){
+    die(callback) {
         this.kill();
-        let explosion = new PlayerDeathVisualEffect(this.game,this.x, this.y);
-
+        let explosion = new PlayerDeathVisualEffect(this.game,this.x, this.y, callback);
+        this.destroy();
     }
 
     update() {

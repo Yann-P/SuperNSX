@@ -23,6 +23,7 @@ class PlayState extends Phaser.State {
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
         this._music.play();
+        this._gameOverSound = this.game.add.audio('Loose')
     }
 
     bombExplosion() {
@@ -37,7 +38,14 @@ class PlayState extends Phaser.State {
 
     playerDies(){
         console.log("overlap bitch")
-        this._player.die();
+        this._player.die(() => {
+            alert("Game Over");
+        });
+        this._gameOverSound.play();
+        //this.game.destroy();
+        
+
+
     }
 
     restore() {
