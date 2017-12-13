@@ -2,12 +2,14 @@ class PlayState extends Phaser.State {
 
     
     create() {
-        
+        this._weapon = new BasicGun(this.game);
+        this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
+
     }
 
 
     update() {
-        
+        //this._weapon.shoot(500,500);
     }
 
     restore() {
