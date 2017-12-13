@@ -90,7 +90,10 @@ class PlayState extends Phaser.State {
             let drop = enemy.die();
 
             if (drop != null) {
-                this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                if (Math.random < 0.8)
+                    this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                else
+                    this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
             }
             
             this._enemies.remove(enemy);
@@ -105,7 +108,6 @@ class PlayState extends Phaser.State {
             //     this.score = +score;
             // }
         }
-        
     }
 
     save() {
