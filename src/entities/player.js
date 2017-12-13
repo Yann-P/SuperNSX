@@ -3,9 +3,10 @@
 class Player extends Phaser.Sprite {
 
     constructor(game) {
-        super(game, 0, 0, "Spaceship");
+        super(game, 1000, 500, "Spaceship");
 
         this._speed = 10;
+        this.anchor.setTo(0.5);
         this.game.add.existing(this);
         this.game.physics.arcade.enable(this);
     }
@@ -14,19 +15,23 @@ class Player extends Phaser.Sprite {
         let keyboard = this.game.input.keyboard;
 
         if (keyboard.isDown(Phaser.KeyCode.UP)) {
-            this.y -= this._speed;
+            if (this.y - this.height > 0)
+                this.y -= this._speed;
         }
         
         if (keyboard.isDown(Phaser.KeyCode.DOWN)) {
-            this.y += this._speed;
+            if (this.y + this.height < this.game.world.camera.height)
+                this.y += this._speed;
         }
 
         if (keyboard.isDown(Phaser.KeyCode.LEFT)) {
-            this.x -= this._speed;
+            if (this.x - this.width > 0)
+                this.x -= this._speed;
         }
 
         if (keyboard.isDown(Phaser.KeyCode.RIGHT)) {
-            this.x += this._speed;
+            if (this.x + this.width < this.game.world.camera.width)
+                this.x += this._speed;
         }
     }
     
