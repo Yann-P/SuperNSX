@@ -29,16 +29,22 @@ class LoadState extends Phaser.State {
         this.game.load.image("Spaceship02", "assets/graphics/Spaceship02.png");
         this.game.load.image("BasicGunShot", "assets/graphics/Bullet01.png");
         this.game.load.image("SawGunShot", "assets/graphics/Bullet03.png");
+        this.game.load.image("BasicEnemyShot", "assets/graphics/Bullet02.png");
         this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
         this.game.load.image("Heart", "assets/graphics/heart.png");
+
+        this.game.load.image("Joystick", "assets/graphics/joystick.png");
         this.game.load.image("Bomb", "assets/graphics/Bomb.png");
         
 
         this.game.load.audio('Explosion', [ 'assets/audio/fx/Explosion.mp3', 'assets/audio/fx/Explosion.ogg' ]);
         this.game.load.audio('Loose', [ 'assets/audio/fx/Loose.mp3', 'assets/audio/fx/Loose.ogg' ]);
         this.game.load.audio('WeaponChange', [ 'assets/audio/fx/WeaponChange.mp3', 'assets/audio/fx/WeaponChange.ogg' ]);
+        this.game.load.audio('HealthUp', [ 'assets/audio/fx/HealthUp.mp3', 'assets/audio/fx/HealthUp.wav']);
+        
         this.game.load.audio('Level01', [ 'assets/audio/music/Level01.mp3', 'assets/audio/music/Level01.ogg' ]);
         this.game.load.audio('Level02', [ 'assets/audio/music/Level02.mp3', 'assets/audio/music/Level02.ogg' ]);
+        
         
         //this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');        
         this.game.load.spritesheet("Explosion01", "assets/graphics/Explosion01.png", 64, 64, 5);      
