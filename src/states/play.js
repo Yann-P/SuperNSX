@@ -38,8 +38,13 @@ class PlayState extends Phaser.State {
 
     playerDies(){
         console.log("overlap bitch")
+        this._weapon.disable()
         this._player.die(() => {
-            alert("Game Over");
+            this.game.destroy();
+            
+            if(confirm("Game Over.\nYou suck.\n\nReplay?"))
+                window.location.reload();
+
         });
         this._gameOverSound.play();
         //this.game.destroy();
