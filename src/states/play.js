@@ -3,6 +3,7 @@ class PlayState extends Phaser.State {
     
     create() {
         this._parallax = new Parallax(this.game, 1);
+        new Player(this.game) ;
     }
 
 
