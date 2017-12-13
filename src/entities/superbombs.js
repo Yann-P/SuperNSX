@@ -12,8 +12,9 @@ class SuperBombs {
     
     launch() { 
         this.nbBombs--; 
+        for(let enemy of this.enemies.children){
+            enemy.die();
+        }
         this.enemies.removeAll(true);
     }
-
-
 }

@@ -4,7 +4,7 @@ class IEnnemy extends Phaser.Sprite {
 		super(game, x, y, key);
 		this._lives	 = lives;
 		this._pattern = pattern;
-		
+
 		this.game.physics.arcade.enable(this);
 		//this.body.collideWorldBounds = true;
 	}
@@ -24,7 +24,11 @@ class IEnnemy extends Phaser.Sprite {
 		return this._lives;
 	}
 
-	set lives(Lives) {
-		this._lives = Lives;
+	set lives(lives) {
+		this._lives = lives;
+	}
+
+	die(){
+        let explosion = new DeathVisualEffect(this.game,this.x, this.y, 20);
 	}
 }
