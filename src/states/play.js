@@ -1,13 +1,10 @@
 class PlayState extends Phaser.State {
-
-    
     create() {
         this._parallax = new Parallax(this.game, 1);
 
         this._enemies = new Enemies(this.game);
 
         this._drops = new Phaser.Group(this.game);
-        //this._drops.add(new HealthDrop(this.game, 50, 50));
 
         this._player = new Player(this.game, this.game.width / 2, this.game.height - 50, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)));
@@ -15,11 +12,16 @@ class PlayState extends Phaser.State {
 
         this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
         this._hudHealth = new HudHealth(this.game, 50 , 50, this._health);
-                
+
+
         this._unlockedWeapon = [];
         this._unlockedWeapon.push(new BasicGun(this.game)); 
         this._weapon = this._unlockedWeapon[0];
         //this._weapon.disable(); // Uncomment if you want to test collisions
+
+        this._scoreEmitter = new EventEmitter();
+        this._hudScore = new HudScore(this.game, this._hudBombs.x, 100, 0, this._scoreEmitter)
+
         
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
 
@@ -31,6 +33,8 @@ class PlayState extends Phaser.State {
 
 
         this._level = new Level(this.game, this._enemies);
+
+        this._score = 0;
     }
 
     bombExplosion() {
@@ -116,6 +120,8 @@ class PlayState extends Phaser.State {
         this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
             let drop = enemy.die();
+            this._score += enemy.score;
+            this._scoreEmitter.emit("updateScore", this._score);
 
             if (drop != null) {
                 this.game.add.audio('WeaponChange')
@@ -135,16 +141,11 @@ class PlayState extends Phaser.State {
 
     restore() {
         if(window.localStorage) {
-            // const score = localStorage.getItem('score');
-            // if(!isNaN(+score)) {
-            //     this.score = +score;
-            // }
         }
     }
 
     save() {
         if(window.localStorage) {
-            //localStorage.setItem('score', ""+this.score);
         }
         
     }
