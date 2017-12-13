@@ -21,6 +21,9 @@ class PlayState extends Phaser.State {
 
         
         this._weapon = new BasicGun(this.game);
+
+        //this._weapon.disable(); // Uncomment if you want to test collisions
+        
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
 
         this._music = this.game.add.audio('Level01')
@@ -40,7 +43,8 @@ class PlayState extends Phaser.State {
         this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
     }
 
-    playerDies(){
+    playerDies(player, enemy){
+        this.enemyDies(enemy, player)
         if (this._health == 0)
         {
            
