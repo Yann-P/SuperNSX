@@ -2,12 +2,12 @@
 
 class Player extends Phaser.Sprite {
 
-    constructor(game, x, y) {
+    constructor(game, x, y, enemies) {
         super(game, x, y, "Spaceship");
 
         this._speed = 4;
         this.game = game;
-        this._bombs = new SuperBombs(this.game);
+        this._bombs = new SuperBombs(enemies);
         
         this.anchor.setTo(0.5);
         this.game.add.existing(this);

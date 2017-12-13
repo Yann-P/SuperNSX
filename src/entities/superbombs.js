@@ -1,14 +1,19 @@
 
-class SuperBombs extends Phaser.Group {
-    constructor(game) {
-        super(game);
+class SuperBombs {
+    constructor(enemies) {
         this.nbBombs = 2;
-        this.game = game;
-        this.enemies = game.enemies;
+        this.enemies = enemies;
     }
 
-    canLaunch() { return this.nbBombs > 0; }
-    launch() { this.nbBombs--; }
+    canLaunch() { 
+        return this.nbBombs > 0; 
+    }
+    
+    
+    launch() { 
+        this.nbBombs--; 
+        this.enemies.removeAll(true);
+    }
 
 
 }
