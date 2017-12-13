@@ -3,7 +3,9 @@ class PlayState extends Phaser.State {
     
     create() {
         this._parallax = new Parallax(this.game, 1);
-        this._hudBombs = new Bombs(this.game, this.game.width -50 , 75);
+        this._hudBombs = new Bombs(this.game, this.game.width -50 , 50);
+        this._hudHealth = new Health(this.game, 50 , 50);
+        
     }
 
 
