@@ -6,7 +6,7 @@ class PlayState extends Phaser.State {
         this._enemies = new Phaser.Group(this.game);
         
         this._enemies = new Enemies(this.game);
-        this._player = new Player(this.game, 0, 0, this._enemies) ;
+        this._player = new Player(this.game, this.game.width / 2, this.game.height - 50, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)))
         this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
         this._hudHealth = new HudHealth(this.game, 50 , 50);
@@ -33,11 +33,20 @@ class PlayState extends Phaser.State {
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
+        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
     }
 
     playerDies(){
-        console.log("overlap bitch")
         this._player.die();
+    }
+
+    enemyDies(enemy, bullet){
+        enemy.lives--;
+        if(enemy.lives <= 0){
+            enemy.die()
+            this._enemies.remove(enemy);
+            this._playerBullets.remove(bullet);
+        }
     }
 
     restore() {
