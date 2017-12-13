@@ -23,7 +23,7 @@ class PlayState extends Phaser.State {
     }
 
     update() {
-        //this._weapon.shoot(500,500);
+        this._weapon.shoot(this._player.x, this._player.y);
     }
 
     restore() {

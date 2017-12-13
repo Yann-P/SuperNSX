@@ -1,7 +1,7 @@
 class BasicGun extends Weapon{
 	constructor(game){
 		super(game);
-		this._shootRate = 3; // Bullet per second
+		this._shootRate = 5; // Bullet per second
 		this._canShoot = true;
 	}
 

@@ -1,7 +1,7 @@
 class BasicGunShot extends Bullet{
 	constructor(game,x,y){
 		super(game, x, y, "BasicGunShot");
-		this._verticalSpeed = 4;
+		this._verticalSpeed = 12;
 		this.angle = 90;
 	}
 
