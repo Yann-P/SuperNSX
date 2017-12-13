@@ -29,19 +29,13 @@ class SawGun extends Weapon {
 	initShootFunctions(){
 		this._shootFunction = [];
 		this._shootFunction[1] = (x,y) =>{
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0));
+			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0, 50));
 		};
 		this._shootFunction[2] = (x,y) =>{
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x-17, y+20, this._verticalSpeed, -10));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x+17, y+20, this._verticalSpeed, 10));
+			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0, 70));
 		};
 		this._shootFunction[3] = (x,y) =>{
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x-17, y+20, this._verticalSpeed, -1));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x+17, y+20, this._verticalSpeed, 1));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x-17, y+20, this._verticalSpeed, -10));
-			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x+17, y+20, this._verticalSpeed, 10));
+			this.shootEmitter.emit("shoot", new SawGunShot(this.game, x, y, this._verticalSpeed, 0, 90));
 		};
 	}
 
