@@ -22,14 +22,17 @@ class PlayState extends Phaser.State {
         //this._enemies.add(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
         
         this._weapon = new BasicGun(this.game);
+        this._enemyweapon = new EnemyBasicGun(this.game, this._player);
 
         //this._weapon.disable(); // Uncomment if you want to test collisions
         
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
+        this._enemyBullets = new EnemyBullets(this.game, this._enemyweapon.shootEmitter);
+        
 
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
-        //this._music.play();
+        //this._music.play(); // Uncomment if you don't want to keep your sanity
 
         this._upgradeSound = this.game.add.audio('WeaponChange');
         this._gameOverSound = this.game.add.audio('Loose');
@@ -53,9 +56,14 @@ class PlayState extends Phaser.State {
         }
 
         this._weapon.shoot(this._player.x, this._player.y-20);
+        for(let enemy of this._enemies.children){
+            this._enemyweapon.shoot(enemy.x, enemy.y);
+        }
+        
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
         this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
+        this.game.physics.arcade.overlap(this._player, this._enemyBullets, PlayState.prototype.playerHit.bind(this));
         this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
     }
 
@@ -73,6 +81,27 @@ class PlayState extends Phaser.State {
     healthUpgrade() {
         this._hudHealth.setHealth(++this._health);
         this._healthUp.play();
+    }
+
+    playerHit(){
+        if (this._health == 0)
+        {
+            this._player.die(() => {
+
+                this.game.state.start('gameover')
+    
+            });
+
+            this._weapon.disable()
+            
+            this._gameOverSound.play();
+        }
+        else{
+            this._health--;
+            this._hudHealth.setHealth(this._health);
+
+        }
+
     }
 
     playerDies(player, enemy){

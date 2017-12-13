@@ -28,6 +28,7 @@ class LoadState extends Phaser.State {
         this.game.load.image("Spaceship01", "assets/graphics/Spaceship01.png");
         this.game.load.image("Spaceship02", "assets/graphics/Spaceship02.png");
         this.game.load.image("BasicGunShot", "assets/graphics/Bullet01.png");
+        this.game.load.image("BasicEnemyShot", "assets/graphics/Bullet02.png");
         this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
         this.game.load.image("Heart", "assets/graphics/heart.png");
         
