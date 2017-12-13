@@ -126,7 +126,11 @@ class PlayState extends Phaser.State {
             if (drop != null) {
                 this.game.add.audio('WeaponChange')
                 if (Math.random() < 0.9) {
-                    this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                    if (this._unlockedWeapon.length==1 /*&& Math.random() < 0.5*/) {
+                        this._drops.add(new SawGunDrop(this.game, drop.x, drop.y));
+                    } else {
+                        this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                    }
                 }
                 else {
                     this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
