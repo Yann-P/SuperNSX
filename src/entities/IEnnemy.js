@@ -7,7 +7,7 @@ class IEnnemy extends Phaser.Group {
 		this._speedX = speedX;
 		this._speedY = speedY;
 		this._lives	 = lives;
-
+		this.body.collideWorldBounds = true;
 	}
 
 
@@ -45,6 +45,9 @@ class IEnnemy extends Phaser.Group {
 		this._speedY = SpeedY;
 	}
 
+	IsDead() {
+		return (this._lives <= 0);
+	}
 
 	get lives() {
 		return this._lives;

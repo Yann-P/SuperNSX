@@ -2,7 +2,7 @@ class PlayState extends Phaser.State {
 
     
     create() {
-        this._ennemy = new WeakEnnemy(this.game, 100, 100);
+
     }
 
 
