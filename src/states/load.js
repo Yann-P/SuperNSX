@@ -35,8 +35,11 @@ class LoadState extends Phaser.State {
         this.game.load.audio('Explosion', [ 'assets/audio/fx/Explosion.mp3', 'assets/audio/fx/Explosion.ogg' ]);
         this.game.load.audio('Loose', [ 'assets/audio/fx/Loose.mp3', 'assets/audio/fx/Loose.ogg' ]);
         this.game.load.audio('WeaponChange', [ 'assets/audio/fx/WeaponChange.mp3', 'assets/audio/fx/WeaponChange.ogg' ]);
+        this.game.load.audio('HealthUp', [ 'assets/audio/fx/HealthUp.mp3', 'assets/audio/fx/HealthUp.wav']);
+        
         this.game.load.audio('Level01', [ 'assets/audio/music/Level01.mp3', 'assets/audio/music/Level01.ogg' ]);
         this.game.load.audio('Level02', [ 'assets/audio/music/Level02.mp3', 'assets/audio/music/Level02.ogg' ]);
+        
         
         //this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');        
         this.game.load.spritesheet("Explosion01", "assets/graphics/Explosion01.png", 64, 64, 5);      

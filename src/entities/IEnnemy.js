@@ -32,7 +32,7 @@ class IEnnemy extends Phaser.Sprite {
 	die(){
 		let explosion = new DeathVisualEffect(this.game,this.x, this.y, 20);
 		
-		if (Math.random() < 0.05)
+		if (Math.random() < 1)
 		{
 			return {x:this.x, y:this.y};
 		}

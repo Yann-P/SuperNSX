@@ -29,8 +29,13 @@ class PlayState extends Phaser.State {
 
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
-        this._music.play();
-        this._gameOverSound = this.game.add.audio('Loose'),
+        //this._music.play();
+
+        this._upgradeSound = this.game.add.audio('WeaponChange')
+        
+        this._gameOverSound = this.game.add.audio('Loose');
+        this._healthUp = this.game.add.audio('HealthUp');
+        
 
         this._level = new Level(this.game, this._enemies);
     }
@@ -55,10 +60,12 @@ class PlayState extends Phaser.State {
 
     weaponUpgrade() {
         this._weapon.upgrade();
+        this._upgradeSound.play();        
     }
 
     healthUpgrade() {
         this._hudHealth.setHealth(++this._health);
+        this._healthUp.play();
     }
 
     playerDies(player, enemy){
@@ -91,7 +98,6 @@ class PlayState extends Phaser.State {
             let drop = enemy.die();
 
             if (drop != null) {
-                this.game.add.audio('WeaponChange')
                 if (Math.random() < 0.9) {
                     this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
                 }
