@@ -2,11 +2,13 @@
 
 class Player extends Phaser.Sprite {
 
-    constructor(game, x, y) {
+    constructor(game, x, y, enemies) {
         super(game, x, y, "Spaceship");
 
         this._speed = 4;
-        this.bombs = 2;
+        this.game = game;
+        this._bombs = new SuperBombs(enemies);
+        
         this.anchor.setTo(0.5);
         this.game.add.existing(this);
         this.game.physics.arcade.enable(this);
@@ -17,9 +19,9 @@ class Player extends Phaser.Sprite {
     }
 
     launchBomb(){
-        if (this.bombs > 0) {
+        if (this._bombs.canLaunch()) {
+            this._bombs.launch();
             this.emitter.emit('superbomb')
-            this.bombs--;
         }
     }
 

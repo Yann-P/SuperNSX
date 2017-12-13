@@ -5,7 +5,7 @@ class WeakEnnemyFactory extends IEnnemyFactory {
 	}
 
  
-	CreateEnnemy(game, x, y, speedX, speedY, lives) {
+	CreateEnnemy(game, x, y, lives) {
 		let enemy = new WeakEnnemy(game, x, y, lives, new SinePattern(
 			0.05, 500, 0
 
