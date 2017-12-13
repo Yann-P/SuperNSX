@@ -12,7 +12,8 @@ class PlayState extends Phaser.State {
 
         this._weakEnnemyFactory = new WeakEnnemyFactory();
         this._enemies.addEnemy(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
-
+        this._strongEnnemyFactory = new StrongEnnemyFactory();
+        this._enemies.addEnemy(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
 
         
         this._weapon = new BasicGun(this.game);
