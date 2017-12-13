@@ -10,4 +10,14 @@ class PlayerBullets extends Phaser.Group{
 			})
 		})
 	}
+
+	setEmitter(emitter){
+		this._shootEmitter = emitter;
+		this._shootEmitter.on("shoot", (bullet) => {
+			this.add(bullet);
+			bullet.events.onDestroy.add(()=>{
+				this.remove(bullet);
+			})
+		})
+	}
 }

@@ -23,7 +23,6 @@ class BasicGun extends Weapon{
 			});
 			timer.start();
 		}
-
 	}
 
 	initShootFunctions(){

@@ -17,10 +17,10 @@ class LoadState extends Phaser.State {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.load.image("WeaponDrop", "assets/graphics/WeaponDrop.png")
         this.game.load.image("HealthDrop", "assets/graphics/HealthDrop.png")
+        this.game.load.image("SawGunDrop", "assets/graphics/SawGunDrop.png")
         this.game.load.image("Background01", "assets/graphics/Background01.png");
         this.game.load.image("Background02", "assets/graphics/Background02.png");
-        for(let i = 1; i <= 3; i++)
-            this.game.load.image("Bullet0" + i, "assets/graphics/Bullet0" + i + ".png");
+
         for(let i = 1; i <= 3; i++)
             this.game.load.image("Enemy0" + i, "assets/graphics/Enemy0" + i + ".png");
         
@@ -28,6 +28,7 @@ class LoadState extends Phaser.State {
         this.game.load.image("Spaceship01", "assets/graphics/Spaceship01.png");
         this.game.load.image("Spaceship02", "assets/graphics/Spaceship02.png");
         this.game.load.image("BasicGunShot", "assets/graphics/Bullet01.png");
+        this.game.load.image("SawGunShot", "assets/graphics/Bullet03.png");
         this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
         this.game.load.image("Heart", "assets/graphics/heart.png");
         this.game.load.image("Bomb", "assets/graphics/Bomb.png");
