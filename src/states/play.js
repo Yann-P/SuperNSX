@@ -43,7 +43,7 @@ class PlayState extends Phaser.State {
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
 
-        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
+        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
     }
 
     playerDies(player, enemy){
@@ -70,12 +70,14 @@ class PlayState extends Phaser.State {
         }
     }
 
-    enemyDies(enemy, bullet){
+    enemyTouched(enemy, bullet){
         enemy.lives--;
         this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
             enemy.die()
             this._enemies.remove(enemy);
+        }else{   
+            let tween = this.game.add.tween(enemy).to({angle:360},500,"Linear",true)
         }
     }
 
