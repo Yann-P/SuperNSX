@@ -3,9 +3,11 @@ class PlayState extends Phaser.State {
     
     create() {
         this._parallax = new Parallax(this.game, 1);
-        this._enemies = new Phaser.Group(this.game);
-        
+
         this._enemies = new Enemies(this.game);
+
+        this._drops = new Phaser.Group(this.game);
+        //this._drops.add(new HealthDrop(this.game, 50, 50));
 
         this._player = new Player(this.game, this.game.width / 2, this.game.height - 50, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)));
@@ -49,10 +51,22 @@ class PlayState extends Phaser.State {
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
+        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
+        this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
+    }
 
-        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
+    playerUpgrade(player, drop) {
+        drop.upgrade(this);
+        this._drops.remove(drop);
+    }
+
+    weaponUpgrade() {
+        this._weapon.upgrade();
+    }
 
         
+    healthUpgrade() {
+        this._hudHealth.setHealth(++this._health);
     }
 
     playerDies(player, enemy){
@@ -60,10 +74,9 @@ class PlayState extends Phaser.State {
         this._enemies.remove(enemy);        
         if (this._health == 0)
         {
-           
             this._player.die(() => {
 
-                this._gameOver  = true;
+                this.game.state.start('gameover')
     
             });
 
@@ -78,12 +91,25 @@ class PlayState extends Phaser.State {
         }
     }
 
-    enemyDies(enemy, bullet){
+    enemyTouched(enemy, bullet){
         enemy.lives--;
         this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
-            enemy.die()
+            let drop = enemy.die();
+
+            if (drop != null) {
+                this.game.add.audio('WeaponChange')
+                if (Math.random() < 0.9) {
+                    this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                }
+                else {
+                    this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
+                }
+            }
+            
             this._enemies.remove(enemy);
+        }else{   
+            let tween = this.game.add.tween(enemy).to({angle:360},500,"Linear",true)
         }
     }
 
@@ -94,7 +120,6 @@ class PlayState extends Phaser.State {
             //     this.score = +score;
             // }
         }
-        
     }
 
     save() {
