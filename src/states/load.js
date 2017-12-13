@@ -30,6 +30,7 @@ class LoadState extends Phaser.State {
         this.game.load.image("SawGunShot", "assets/graphics/Bullet03.png");
         this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
         this.game.load.image("Heart", "assets/graphics/heart.png");
+        this.game.load.image("Bomb", "assets/graphics/Bomb.png");
         
 
         this.game.load.audio('Explosion', [ 'assets/audio/fx/Explosion.mp3', 'assets/audio/fx/Explosion.ogg' ]);
@@ -47,7 +48,7 @@ class LoadState extends Phaser.State {
     checkIfLoaded() {
         if(this.loaded) {
             clearInterval(this.interval);
-            this.game.state.start('play');
+            this.game.state.start('title');
         }
     }
 
