@@ -1,0 +1,7 @@
+class IEnnemyFactory {
+
+	constructor() { }
+
+	CreateEnnemy() { }
+
+}

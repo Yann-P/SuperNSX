@@ -5,8 +5,10 @@ class Player extends Phaser.Sprite {
     constructor(game, x, y) {
         super(game, x, y, "Spaceship");
 
-        this._speed = 10;
+        this._speed = 4;
+
         this.bombs = new SuperBombs(game);
+        
         this.anchor.setTo(0.5);
         this.game.add.existing(this);
         this.game.physics.arcade.enable(this);
