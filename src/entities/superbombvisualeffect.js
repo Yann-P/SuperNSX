@@ -30,6 +30,8 @@ class SuperBombVisualEffect extends Phaser.Group {
             this.destroy();
         })
 
+        let sound = this.game.add.audio('Explosion');
+        sound.play();
         
         this.add(this._whiteScreen)
         this.add(this._explosion)

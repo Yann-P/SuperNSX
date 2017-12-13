@@ -16,6 +16,10 @@ class PlayState extends Phaser.State {
         
         this._weapon = new BasicGun(this.game);
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
+
+        this._music = this.game.add.audio('Level01')
+        this._music.loop = true;
+        this._music.play();
     }
 
     bombExplosion() {
