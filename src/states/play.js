@@ -47,7 +47,8 @@ class PlayState extends Phaser.State {
     }
 
     playerDies(player, enemy){
-        this.enemyDies(enemy, player)
+        enemy.die()
+        this._enemies.remove(enemy);        
         if (this._health == 0)
         {
            
