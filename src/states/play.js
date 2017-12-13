@@ -9,7 +9,10 @@ class PlayState extends Phaser.State {
         new Player(this.game) ;
 
         this._weakEnnemyFactory = new WeakEnnemyFactory();
-        this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1);
+        this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 1);
+
+        this._strongEnnemyFactory = new StrongEnnemyFactory();
+        this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5);
 
         this._player = new Player(this.game) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)))
