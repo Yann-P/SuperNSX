@@ -153,7 +153,7 @@ class PlayState extends Phaser.State {
 
 
     addSawGun() {
-        this._unlockedWeapon.push(new SawGunGun(this.game));
+        this._unlockedWeapon.push(new SawGun(this.game));
     }
     
 
