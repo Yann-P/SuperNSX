@@ -7,8 +7,7 @@ class StrongEnnemyFactory extends IEnnemyFactory {
  
 	CreateEnnemy(game, x, y, lives) {
 		let enemy = new StrongEnnemy(game, x, y, lives, new SinePattern(
-			0.03, 300, 0
-
+			0.05, game.world.camera.width/2, 0, game.world.camera.width/2
 		));
 		return enemy;
 	}
