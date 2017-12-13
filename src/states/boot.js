@@ -6,6 +6,8 @@ class BootState extends Phaser.State {
     }
 
     create() {
+        this.game.stage.disableVisibilityChange = true;
+        
         this.game.state.start('load');
     }
 

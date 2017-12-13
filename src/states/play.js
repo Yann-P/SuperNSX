@@ -62,11 +62,11 @@ class PlayState extends Phaser.State {
     }
 
     playerDies(player, enemy){
-        this.enemyDies(enemy, player)
+        enemy.die()
+        this._enemies.remove(enemy);        
         if (this._health == 0)
         {
             this._player.die(() => {
-                this.game.destroy();
                 
                 if(confirm("Game Over.\nYou suck.\n\nReplay?"))
                     window.location.reload();
@@ -86,6 +86,7 @@ class PlayState extends Phaser.State {
 
     enemyDies(enemy, bullet){
         enemy.lives--;
+        this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
             let drop = enemy.die();
 
@@ -97,7 +98,6 @@ class PlayState extends Phaser.State {
             }
             
             this._enemies.remove(enemy);
-            this._playerBullets.remove(bullet);
         }
     }
 
