@@ -15,6 +15,8 @@ class LoadState extends Phaser.State {
 
 
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.load.image("WeaponDrop", "assets/graphics/WeaponDrop.png")
+        this.game.load.image("HealthDrop", "assets/graphics/HealthDrop.png")
         this.game.load.image("Background01", "assets/graphics/Background01.png");
         this.game.load.image("Background02", "assets/graphics/Background02.png");
         for(let i = 1; i <= 3; i++)
@@ -45,7 +47,7 @@ class LoadState extends Phaser.State {
     checkIfLoaded() {
         if(this.loaded) {
             clearInterval(this.interval);
-            this.game.state.start('play');
+            this.game.state.start('title');
         }
     }
 
