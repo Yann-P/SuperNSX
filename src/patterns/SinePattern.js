@@ -5,7 +5,7 @@ class SinePattern extends APattern {
         this._speed = speed;
         this._amplitude = amplitude;
         this._harmonics = harmonics;
-        this.x0 = x0
+        this.x0 = x0;
     }
 
     nextCoords(x, y) {
