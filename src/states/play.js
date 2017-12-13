@@ -12,17 +12,18 @@ class PlayState extends Phaser.State {
 
         this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
         this._hudHealth = new HudHealth(this.game, 50 , 50, this._health);
-        this._scoreEmitter = new EventEmitter();
-        this._hudScore = new HudScore(this.game, this._hudBombs.x, 100, 0, this._scoreEmitter)
 
-        this._weakEnnemyFactory = new WeakEnnemyFactory();
-        this._strongEnnemyFactory = new StrongEnnemyFactory();
-        
-        this._weapon = new SawGun(this.game);
         // this._weapon = new BasicGun(this.game);
         this._enemyweapon = new EnemyBasicGun(this.game, this._player);
 
+        this._unlockedWeapon = [];
+        this._unlockedWeapon.push(new BasicGun(this.game)); 
+        this._weapon = this._unlockedWeapon[0];
         //this._weapon.disable(); // Uncomment if you want to test collisions
+
+        this._scoreEmitter = new EventEmitter();
+        this._hudScore = new HudScore(this.game, this._hudBombs.x, 100, 0, this._scoreEmitter)
+
         
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
         this._enemyBullets = new EnemyBullets(this.game, this._enemyweapon.shootEmitter);
@@ -89,6 +90,27 @@ class PlayState extends Phaser.State {
         this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
         this.game.physics.arcade.overlap(this._player, this._enemyBullets, PlayState.prototype.playerHit.bind(this));
         this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
+
+        let keyboard = this.game.input.keyboard;
+
+        if (keyboard.isDown(Phaser.KeyCode.ONE)) {
+            this._weapon = this._unlockedWeapon[0];
+            this._playerBullets.setEmitter(this._weapon.shootEmitter)
+        }
+
+        if (keyboard.isDown(Phaser.KeyCode.TWO)) {
+            if (this._unlockedWeapon.length>=2) {
+                this._weapon = this._unlockedWeapon[1];
+                this._playerBullets.setEmitter(this._weapon.shootEmitter)
+            }
+        }
+        
+        if (keyboard.isDown(Phaser.KeyCode.THREE)) {
+            if (this._unlockedWeapon.length>=3) {
+                this._weapon = this._unlockedWeapon[2];
+                this._playerBullets.setEmitter(this._weapon.shootEmitter)
+            }
+        }
     }
 
     playerUpgrade(player, drop) {
@@ -129,6 +151,12 @@ class PlayState extends Phaser.State {
 
     }
 
+
+    addSawGun() {
+        this._unlockedWeapon.push(new SawGunGun(this.game));
+    }
+    
+
     playerDies(player, enemy){
         enemy.die()
         this._enemies.remove(enemy, true);        
@@ -147,7 +175,6 @@ class PlayState extends Phaser.State {
         else{
             this._health--;
             this._hudHealth.setHealth(this._health);
-
         }
     }
 
@@ -164,7 +191,11 @@ class PlayState extends Phaser.State {
 
             if (drop != null) {
                 if (Math.random() < 0.9) {
-                    this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                    if (this._unlockedWeapon.length==1 && Math.random() < 0.5) {
+                        this._drops.add(new SawGunDrop(this.game, drop.x, drop.y));
+                    } else {
+                        this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+                    }
                 }
                 else {
                     this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
