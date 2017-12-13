@@ -1,9 +1,10 @@
 class WeakEnnemy extends IEnnemy {
 
-	constructor(game, x, y, speedX, speedY, lives) {
-		super(game, x, y, speedX, speedY, lives);
-		let sprite = new Phaser.Sprite(game, x, y, 'Enemy01');
+	constructor(game, x, y, lives, pattern) {
+		super(game, x, y, lives, pattern);
+		let sprite = new Phaser.Sprite(game, 0, 0, 'Enemy01');
 		sprite.anchor.set(0.5);
+		sprite.angle = -90;
 		this.add(sprite);
 
 	}
