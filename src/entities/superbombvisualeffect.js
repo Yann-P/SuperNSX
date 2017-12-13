@@ -1,6 +1,6 @@
 class SuperBombVisualEffect extends Phaser.Group {
 
-    constructor(game, x, y) {
+    constructor(game) {
         super(game)
         this._explosion = new Phaser.Sprite(
             this.game, 

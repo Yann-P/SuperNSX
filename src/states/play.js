@@ -15,10 +15,9 @@ class PlayState extends Phaser.State {
         this._hudHealth = new HudHealth(this.game, 50 , 50, this._health);
 
         this._weakEnnemyFactory = new WeakEnnemyFactory();
-        this._enemies.add(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
-        //this._strongEnnemyFactory = new StrongEnnemyFactory();
+        this._strongEnnemyFactory = new StrongEnnemyFactory();
+        //this._enemies.add(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
         //this._enemies.add(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
-
         
         this._weapon = new BasicGun(this.game);
 
@@ -29,10 +28,13 @@ class PlayState extends Phaser.State {
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
         this._music.play();
-        this._gameOverSound = this.game.add.audio('Loose')
+        this._gameOverSound = this.game.add.audio('Loose'),
+
+        this._level = new Level(this.game, this._enemies);
     }
 
     bombExplosion() {
+        new SuperBombVisualEffect(this.game);
         this._hudBombs.bombLaunched();
     }
 
@@ -40,6 +42,7 @@ class PlayState extends Phaser.State {
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
+
         this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
     }
 
