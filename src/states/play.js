@@ -91,10 +91,13 @@ class PlayState extends Phaser.State {
             let drop = enemy.die();
 
             if (drop != null) {
-                if (Math.random < 0.8)
+                this.game.add.audio('WeaponChange')
+                if (Math.random() < 0.9) {
                     this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
-                else
+                }
+                else {
                     this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
+                }
             }
             
             this._enemies.remove(enemy);
