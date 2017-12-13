@@ -48,7 +48,7 @@ class LoadState extends Phaser.State {
     checkIfLoaded() {
         if(this.loaded) {
             clearInterval(this.interval);
-            this.game.state.start('play');
+            this.game.state.start('title');
         }
     }
 
