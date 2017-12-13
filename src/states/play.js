@@ -6,7 +6,8 @@ class PlayState extends Phaser.State {
         this._enemies = new Phaser.Group(this.game);
         
         this._enemies = new Enemies(this.game);
-        this._player = new Player(this.game, 0, 0, this._enemies) ;
+
+        this._player = new Player(this.game, this.game.width / 2, this.game.height - 50, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)));
         this._health = 2;
 
@@ -25,6 +26,7 @@ class PlayState extends Phaser.State {
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
         this._music.play();
+        this._gameOverSound = this.game.add.audio('Loose')
     }
 
     bombExplosion() {
@@ -35,17 +37,38 @@ class PlayState extends Phaser.State {
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
+        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
     }
 
     playerDies(){
-        if (this._health = 0)
+        if (this._health == 0)
         {
-            this._player.die();
+           
+            this._player.die(() => {
+                this.game.destroy();
+                
+                if(confirm("Game Over.\nYou suck.\n\nReplay?"))
+                    window.location.reload();
+    
+            });
 
+            this._weapon.disable()
+            
+            this._gameOverSound.play();
         }
         else{
             this._health--;
             this._hudHealth.setHealth(this._health);
+
+        }
+    }
+
+    enemyDies(enemy, bullet){
+        enemy.lives--;
+        if(enemy.lives <= 0){
+            enemy.die()
+            this._enemies.remove(enemy);
+            this._playerBullets.remove(bullet);
         }
     }
 
