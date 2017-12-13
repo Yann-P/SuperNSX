@@ -31,11 +31,12 @@ class PlayState extends Phaser.State {
         this._music.loop = true;
         //this._music.play();
 
-        this._upgradeSound = this.game.add.audio('WeaponChange')
-        
+        this._upgradeSound = this.game.add.audio('WeaponChange');
         this._gameOverSound = this.game.add.audio('Loose');
         this._healthUp = this.game.add.audio('HealthUp');
         
+        this._gameOver = false;
+
 
         this._level = new Level(this.game, this._enemies);
     }
@@ -46,10 +47,15 @@ class PlayState extends Phaser.State {
     }
 
     update() {
+
+        if(this._gameOver) {
+            this.game.state.start('gameover');
+        }
+
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
-        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyDies.bind(this));
+        this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
         this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
     }
 
@@ -63,6 +69,7 @@ class PlayState extends Phaser.State {
         this._upgradeSound.play();        
     }
 
+        
     healthUpgrade() {
         this._hudHealth.setHealth(++this._health);
         this._healthUp.play();
@@ -74,9 +81,8 @@ class PlayState extends Phaser.State {
         if (this._health == 0)
         {
             this._player.die(() => {
-                
-                if(confirm("Game Over.\nYou suck.\n\nReplay?"))
-                    window.location.reload();
+
+                this.game.state.start('gameover')
     
             });
 
@@ -91,7 +97,7 @@ class PlayState extends Phaser.State {
         }
     }
 
-    enemyDies(enemy, bullet){
+    enemyTouched(enemy, bullet){
         enemy.lives--;
         this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
@@ -107,6 +113,8 @@ class PlayState extends Phaser.State {
             }
             
             this._enemies.remove(enemy);
+        }else{   
+            let tween = this.game.add.tween(enemy).to({angle:360},500,"Linear",true)
         }
     }
 
