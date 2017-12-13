@@ -12,9 +12,7 @@ class StrongEnnemyFactory extends IEnnemyFactory {
 			game.rnd.between(0,2),
 			game.rnd.between(game.world.camera.width/5, 4*game.world.camera.width/5),
 		));
-
-
-
+		
 		return enemy;
 	}
 
