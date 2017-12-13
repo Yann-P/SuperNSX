@@ -9,7 +9,7 @@ class Level {
         this._enemiesPerWave	 = 15;
         this._proportionOfStrongEnemies = 0.5;
         this._time_between_spawn = Phaser.Timer.SECOND;
-        this._time_between_waves = Phaser.Timer.SECOND * (this._enemiesPerWave + 5);
+        this._time_between_waves = Phaser.Timer.SECOND * (this._enemiesPerWave + 4);
 
 
 		this.createNewSetOfWaves();
@@ -69,16 +69,16 @@ class Level {
 	}
 
 	increaseEnemiesPerWave() {
-		this._enemiesPerWave++;
+		this._enemiesPerWave +=2;
 	}
 
 	increasePropotionOfStrongEnemies() {
-        this._proportionOfStrongEnemies += 0.05;		
+        this._proportionOfStrongEnemies += 0.08;		
 	}
 
 	decreaseTimeBetweenSpawn() {
 		if (this._time_between_spawn > 0.2) {
-        	this._time_between_spawn -= 0.1*Phaser.Timer.SECOND;
+        	this._time_between_spawn -= 0.15*Phaser.Timer.SECOND;
 		}
 	}
 
@@ -87,10 +87,4 @@ class Level {
 			this._time_between_waves -= 0.5*Phaser.Timer.SECOND;
 		}
 	}
-
-
-
-
-
-
 }
