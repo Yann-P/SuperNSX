@@ -1,49 +1,20 @@
 class IEnnemy extends Phaser.Group {
 
-	constructor(game, x, y, speedX, speedY, lives) {
+	constructor(game, x, y, lives, pattern) {
 		super(game);
-		this._x 	 = x;
-		this._y 	 = y;
-		this._speedX = speedX;
-		this._speedY = speedY;
+		this.x 	 = x;
+		this.y 	 = y;
 		this._lives	 = lives;
+		this._pattern = pattern;
 		//this.body.collideWorldBounds = true;
 	}
 
-
-	get x() {
-		return this._x;
+	update() {
+		let newCoords = this._pattern.nextCoords(this.x, this.y);
+		this.x = newCoords.x;
+		this.y = newCoords.y;
 	}
 
-	set x(X) {
-		this._x = X;
-	}
-
-	get y() {
-		return this._y;
-	}
-
-	set y(Y) {
-		this._y = Y;
-	}
-
-
-
-	get speedX() {
-		return this._speedX;
-	}
-
-	set speedX(SpeedX) {
-		this._speedX = SpeedX;
-	}
-
-	get speedY() {
-		return this._speedY;
-	}
-
-	set speedY(SpeedY) {
-		this._speedY = SpeedY;
-	}
 
 	IsDead() {
 		return (this._lives <= 0);
