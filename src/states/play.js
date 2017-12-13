@@ -15,14 +15,10 @@ class PlayState extends Phaser.State {
 
         this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
         this._hudHealth = new HudHealth(this.game, 50 , 50, this._health);
-
-        this._weakEnnemyFactory = new WeakEnnemyFactory();
-        this._strongEnnemyFactory = new StrongEnnemyFactory();
-        //this._enemies.add(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
-        //this._enemies.add(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
-        
-        this._weapon = new BasicGun(this.game);
-
+                
+        this._unlockedWeapon = [];
+        this._unlockedWeapon.push(new BasicGun(this.game)); 
+        this._weapon = this._unlockedWeapon[0];
         //this._weapon.disable(); // Uncomment if you want to test collisions
         
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
@@ -53,6 +49,24 @@ class PlayState extends Phaser.State {
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
         this.game.physics.arcade.overlap(this._enemies, this._playerBullets, PlayState.prototype.enemyTouched.bind(this));
         this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
+
+        let keyboard = this.game.input.keyboard;
+
+        if (keyboard.isDown(Phaser.KeyCode.ONE)) {
+            this._weapon = this._unlockedWeapon[0];
+        }
+
+        if (keyboard.isDown(Phaser.KeyCode.TWO)) {
+            if (this._unlockedWeapon.length>=2) {
+                this._weapon = this._unlockedWeapon[1];
+            }
+        }
+        
+        if (keyboard.isDown(Phaser.KeyCode.THREE)) {
+            if (this._unlockedWeapon.length>=3) {
+                this._weapon = this._unlockedWeapon[2];
+            }
+        }
     }
 
     playerUpgrade(player, drop) {
