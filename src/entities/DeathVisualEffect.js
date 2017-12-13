@@ -10,7 +10,4 @@ class DeathVisualEffect extends Phaser.Group {
         this._explosion.animations.currentAnim.onComplete.add(callback || (() => {}))
         this.add(this._explosion)
     }
-
-
-
 }

@@ -27,6 +27,7 @@ class PlayState extends Phaser.State {
     }
 
     bombExplosion() {
+        new SuperBombVisualEffect(this.game);
         this._hudBombs.bombLaunched();
     }
 

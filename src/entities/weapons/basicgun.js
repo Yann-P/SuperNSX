@@ -5,10 +5,8 @@ class BasicGun extends Weapon{
 		this._canShoot = true;
 		this._verticalSpeed = 12;
 		this._upgradeLevel = 1;
-		
-		this._shootFunction = (x,y) =>{
-			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x, y, this._verticalSpeed, 0));
-		};
+		this._maxLevel = 2;
+		this.initShootFunctions();
 	}
 
 	/**
@@ -16,7 +14,7 @@ class BasicGun extends Weapon{
 	 */
 	shoot(x,y){
 		if(this._canShoot && this._enabled){
-			this._shootFunction(x,y);
+			this._shootFunction[this._upgradeLevel](x,y);
 			this._canShoot = false;
 			let timer = this.game.time.create(true);
 			timer.loop(1000/this._shootRate, () => {
@@ -28,14 +26,22 @@ class BasicGun extends Weapon{
 
 	}
 
+	initShootFunctions(){
+
+		this._shootFunction = [];
+		this._shootFunction[1] = (x,y) =>{
+			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x, y, this._verticalSpeed, 0));
+		};
+		this._shootFunction[2] = (x,y) =>{
+			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x, y, this._verticalSpeed, 0));
+			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x-17, y+20, this._verticalSpeed, -10));
+			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x+17, y+20, this._verticalSpeed, 10));
+		};
+	}
+
 	upgradeWeapon(){
-		if(this._upgradeLevel == 1){
+		if(this._upgradeLevel < this._maxLevel){
 			this._upgradeLevel++;
-			this._shootFunction = (x,y) =>{
-				this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x, y, this._verticalSpeed, 0));
-				this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x-17, y+20, this._verticalSpeed, -10));
-				this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x+17, y+20, this._verticalSpeed, 10));
-			}
 		}
 	}
 }
