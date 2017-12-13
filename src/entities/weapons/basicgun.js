@@ -27,7 +27,6 @@ class BasicGun extends Weapon{
 	}
 
 	initShootFunctions(){
-
 		this._shootFunction = [];
 		this._shootFunction[1] = (x,y) =>{
 			this.shootEmitter.emit("shoot", new BasicGunShot(this.game, x, y, this._verticalSpeed, 0));
@@ -46,7 +45,7 @@ class BasicGun extends Weapon{
 		};
 	}
 
-	upgradeWeapon(){
+	upgrade(){
 		if(this._upgradeLevel < this._maxLevel){
 			this._upgradeLevel++;
 		}
