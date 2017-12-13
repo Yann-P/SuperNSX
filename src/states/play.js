@@ -39,6 +39,29 @@ class PlayState extends Phaser.State {
         this._gameOver = false;
 
 
+        if(!this.game.device.desktop) {
+
+        
+            this._joystick = this.game.add.sprite(this.game.width - 200, this.game.height - 200, 'Joystick');
+            this._joystick.anchor.setTo(0.5);
+            this._joystick.scale.setTo(2);
+            this._joystick.alpha = 0.5;
+            
+            
+            this.game.input.addMoveCallback((pointer, x, y) => {
+                this._player.setJoystick(processJoystick(x, y, this._joystick.x, this._joystick.y, 50));
+            });
+            this.game.input.onUp.add(() => {
+                this._joystick.alpha = 0.5;
+                this._player.setJoystick("")
+            })
+            this.game.input.onDown.add(() => {
+                this._joystick.alpha = 0.1;
+                this._player.setJoystick("")
+            })
+        }
+
+
         this._level = new Level(this.game, this._enemies);
 
         this._score = 0;
@@ -52,6 +75,7 @@ class PlayState extends Phaser.State {
     update() {
 
         if(this._gameOver) {
+            this.game.input.reset(true)
             this.game.state.start('gameover');
         }
 
@@ -107,7 +131,7 @@ class PlayState extends Phaser.State {
 
     playerDies(player, enemy){
         enemy.die()
-        this._enemies.remove(enemy);        
+        this._enemies.remove(enemy, true);        
         if (this._health == 0)
         {
             this._player.die(() => {
@@ -164,4 +188,42 @@ class PlayState extends Phaser.State {
         
     }
 
+}
+
+
+
+
+
+function processJoystick(x, y, cx, cy, o) {
+	if(x > cx + o) {
+		if(y > cy - o && y < cy + o) {
+			return "r"
+		}
+		else if(y < cy - o) {
+			return "tr"
+		}
+		else if(y > cy + o) {
+			return "br"
+		}
+	} else if(x < cx - o) {
+		if(y > cy - o && y < cy + o) {
+			return "l"
+		}
+		else if(y < cy - o) {
+			return "tl"
+		}
+		else if(y > cy + o) {
+			return "bl"
+		}
+	} else if(y < cy - o) {
+		if(x > cx - o && x < cx + o) {
+			return "t"
+		}
+	} else if(y > cy + o) {
+		if(x > cx - o && x < cx + o) {
+			return "b"
+		}
+	}
+
+	return "";
 }
