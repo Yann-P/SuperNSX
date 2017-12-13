@@ -3,21 +3,24 @@ class PlayState extends Phaser.State {
     
     create() {
         this._parallax = new Parallax(this.game, 1);
-        this._hudBombs = new Bombs(this.game, this.game.width -50 , 50);
-        this._hudHealth = new Health(this.game, 50 , 50);
-        
-        this._weakEnnemyFactory = new WeakEnnemyFactory();
-        this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1);
-
         this._player = new Player(this.game) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)))
+        this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
+        this._hudHealth = new HudHealth(this.game, 50 , 50);
+        
+        this._enemies = new Enemies(this.game);
+
+        this._weakEnnemyFactory = new WeakEnnemyFactory();
+        this._enemies.addEnemy(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
+
+
         
         this._weapon = new BasicGun(this.game);
         this._playerBullets = new PlayerBullets(this.game, this._weapon.shootEmitter);
     }
 
     bombExplosion() {
-        console.log("boum");
+        this._hudBombs.bombLaunched();
     }
 
     update() {
