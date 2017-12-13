@@ -18,8 +18,8 @@ class PlayState extends Phaser.State {
         this._weakEnnemyFactory = new WeakEnnemyFactory();
         this._strongEnnemyFactory = new StrongEnnemyFactory();
         
-        //this._weapon = new SawGun(this.game);
-        this._weapon = new BasicGun(this.game);
+        this._weapon = new SawGun(this.game);
+        // this._weapon = new BasicGun(this.game);
         this._enemyweapon = new EnemyBasicGun(this.game, this._player);
 
         //this._weapon.disable(); // Uncomment if you want to test collisions
@@ -154,8 +154,8 @@ class PlayState extends Phaser.State {
     enemyTouched(enemy, bullet){
         enemy.lives -= bullet._damage;
 
-        if (! bullet._piercing)
-            this._playerBullets.remove(bullet);
+        // if (! bullet._piercing)
+        this._playerBullets.remove(bullet);
 
         if (enemy.lives <= 0) {
             let drop = enemy.die();
