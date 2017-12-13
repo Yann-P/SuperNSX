@@ -1,5 +1,3 @@
-
-
 class Player extends Phaser.Sprite {
 
     constructor(game, x, y, enemies) {
@@ -27,7 +25,7 @@ class Player extends Phaser.Sprite {
 
     die(callback) {
         this.kill();
-        let explosion = new PlayerDeathVisualEffect(this.game,this.x, this.y, callback);
+        let explosion = new DeathVisualEffect(this.game,this.x, this.y, 10, callback);
         this.destroy();
     }
 
