@@ -4,6 +4,7 @@ class IEnnemy extends Phaser.Sprite {
 		super(game, x, y, key);
 		this._lives	 = lives;
 		this._pattern = pattern;
+		this._score = lives;
 
 		this._emitter = new EventEmitter;
 		this.game.physics.arcade.enable(this);
@@ -25,8 +26,13 @@ class IEnnemy extends Phaser.Sprite {
 		return this._lives;
 	}
 
+
 	set lives(lives) {
 		this._lives = lives;
+	}
+
+	get score() {
+		return this._score;
 	}
 
 	die(){
