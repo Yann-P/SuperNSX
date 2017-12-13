@@ -21,7 +21,7 @@ class PlayState extends Phaser.State {
         //this._enemies.add(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
         //this._enemies.add(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
         
-        this._weapon = new BasicGun(this.game);
+        this._weapon = new SawGun(this.game);
 
         //this._weapon.disable(); // Uncomment if you want to test collisions
         
@@ -85,9 +85,12 @@ class PlayState extends Phaser.State {
     }
 
     enemyDies(enemy, bullet){
-        enemy.lives--;
-        this._playerBullets.remove(bullet);
-        if(enemy.lives <= 0){
+        enemy.lives -= bullet._damage;
+
+        if (! bullet._piercing)
+            this._playerBullets.remove(bullet);
+
+        if (enemy.lives <= 0) {
             let drop = enemy.die();
 
             if (drop != null) {
@@ -99,7 +102,7 @@ class PlayState extends Phaser.State {
                     this._drops.add(new HealthDrop(this.game, drop.x, drop.y));
                 }
             }
-            
+
             this._enemies.remove(enemy);
         }
     }

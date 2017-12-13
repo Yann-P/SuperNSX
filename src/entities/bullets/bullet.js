@@ -3,7 +3,9 @@ class Bullet extends Phaser.Sprite{
 		super(game, x, y, spriteName);
 		this.anchor.setTo(0.5);
 		this._destructionOffset = 50;
-        this.game.physics.arcade.enable(this);
+		this.game.physics.arcade.enable(this);
+		this._damage = 1;
+		this._piercing = false;
 	}
 
 	update(){
