@@ -17,6 +17,9 @@ class TitleState extends Phaser.State {
             this.spaceship.x = -50
             this.spaceship.y = 500
             this.spaceship.angle = 90;
+
+
+            
     
     
            
@@ -48,6 +51,7 @@ class TitleState extends Phaser.State {
                 align: "left"
             });
             credits.anchor.setTo(0, 1);
+
     
     
             text.inputEnabled = true;
