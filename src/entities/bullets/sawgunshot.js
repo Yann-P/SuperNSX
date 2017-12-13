@@ -6,7 +6,7 @@ class SawGunShot extends Bullet {
 		this.width = size;
 		this.height = size;
 		this.angle = 90 + horizontalSpeed*2.7;
-		this._damage = 1;
+		this._damage = 2;
 		this._piercing = true;
 		this.x0 = x;
 	}
