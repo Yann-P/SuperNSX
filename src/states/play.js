@@ -73,10 +73,10 @@ class PlayState extends Phaser.State {
 
     enemyDies(enemy, bullet){
         enemy.lives--;
+        this._playerBullets.remove(bullet);
         if(enemy.lives <= 0){
             enemy.die()
             this._enemies.remove(enemy);
-            this._playerBullets.remove(bullet);
         }
     }
 
