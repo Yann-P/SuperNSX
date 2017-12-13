@@ -1,4 +1,4 @@
-class Bombs extends Phaser.Group {
+class HudSuperBombs extends Phaser.Group {
     constructor(game, x, y) {
         super(game)
         this.nbBombs = 2;
@@ -10,6 +10,15 @@ class Bombs extends Phaser.Group {
 
         this.text.anchor.setTo(1,0);
         this.add(this.text);
+    }
+
+    bombLaunched() {
+        this.nbBombs--;
+        this.text = new Phaser.Text(game, x, y, "Super Bombs: " + this.nbBombs, {
+            font: "40px arial",
+            fill: "#ffffff",
+            align: "center"
+        });
     }
 
 }

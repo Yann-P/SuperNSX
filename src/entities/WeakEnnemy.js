@@ -8,8 +8,4 @@ class WeakEnnemy extends IEnnemy {
 
 	}
 
-
-
-
-
 }
