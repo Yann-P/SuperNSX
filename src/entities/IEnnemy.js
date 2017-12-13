@@ -1,11 +1,11 @@
-class IEnnemy extends Phaser.Group {
+class IEnnemy extends Phaser.Sprite {
 
-	constructor(game, x, y, lives, pattern) {
-		super(game);
-		this.x 	 = x;
-		this.y 	 = y;
+	constructor(game, x, y, key, lives, pattern) {
+		super(game, x, y, key);
 		this._lives	 = lives;
 		this._pattern = pattern;
+		
+		this.game.physics.arcade.enable(this);
 		//this.body.collideWorldBounds = true;
 	}
 

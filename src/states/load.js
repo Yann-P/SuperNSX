@@ -29,7 +29,8 @@ class LoadState extends Phaser.State {
         this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
         
         //this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');        
-        this.game.load.spritesheet("Explosion01", "assets/graphics/Explosion01.png", 64, 64, 5);
+        this.game.load.spritesheet("Explosion01", "assets/graphics/Explosion01.png", 64, 64, 5);      
+        this.game.load.spritesheet("PlayerExplosion", "assets/graphics/PlayerExplosion.png", 128, 128, 16);
        
     }
 
