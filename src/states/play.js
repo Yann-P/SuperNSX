@@ -53,7 +53,6 @@ class PlayState extends Phaser.State {
         {
            
             this._player.die(() => {
-                this.game.destroy();
                 
                 if(confirm("Game Over.\nYou suck.\n\nReplay?"))
                     window.location.reload();
