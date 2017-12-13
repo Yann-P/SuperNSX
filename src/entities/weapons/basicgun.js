@@ -27,7 +27,7 @@ class BasicGun extends Weapon{
 
 	}
 
-	upgradeWeapon(){
+	upgrade(){
 		if(this._upgradeLevel == 1){
 			this._upgradeLevel++;
 			this._shootFunction = (x,y) =>{

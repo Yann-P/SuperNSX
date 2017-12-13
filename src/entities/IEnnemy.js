@@ -27,9 +27,4 @@ class IEnnemy extends Phaser.Sprite {
 	set lives(Lives) {
 		this._lives = Lives;
 	}
-
-
-
-
-
 }

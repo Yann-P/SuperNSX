@@ -3,11 +3,14 @@ class PlayState extends Phaser.State {
     
     create() {
         this._parallax = new Parallax(this.game, 1);
-        this._enemies = new Phaser.Group(this.game);
-        
+
         this._enemies = new Enemies(this.game);
         this._player = new Player(this.game, 0, 0, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)))
+
+        this._drops = new Phaser.Group(this.game);
+        this._drops.add(new WeaponDrop(this.game, 50, 50));
+
         this._hudBombs = new HudSuperBombs(this.game, this.game.width -50 , 50, this._player );
         this._hudHealth = new HudHealth(this.game, 50 , 50);
 
@@ -33,6 +36,20 @@ class PlayState extends Phaser.State {
         this._weapon.shoot(this._player.x, this._player.y-20);
 
         this.game.physics.arcade.overlap(this._enemies, this._player, PlayState.prototype.playerDies.bind(this));
+        this.game.physics.arcade.overlap(this._drops, this._player, PlayState.prototype.playerUpgrade.bind(this));
+    }
+
+    playerUpgrade(player, drop) {
+        drop.upgrade(this);
+        this._drops.remove(drop);
+    }
+
+    weaponUpgrade() {
+        this._weapon.upgrade();
+    }
+
+    lifeUpgrade() {
+
     }
 
     playerDies(){
