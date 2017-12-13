@@ -27,22 +27,22 @@ class Player extends Phaser.Sprite {
         let keyboard = this.game.input.keyboard;
 
         if (keyboard.isDown(Phaser.KeyCode.UP)) {
-            if (this.y - this.height > 0)
+            if (this.y - this.height/2 > 0)
                 this.y -= this._speed;
         }
         
         if (keyboard.isDown(Phaser.KeyCode.DOWN)) {
-            if (this.y + this.height < this.game.world.camera.height)
+            if (this.y + this.height/2 < this.game.world.camera.height)
                 this.y += this._speed;
         }
 
         if (keyboard.isDown(Phaser.KeyCode.LEFT)) {
-            if (this.x - this.width > 0)
+            if (this.x - this.width/2 > 0)
                 this.x -= this._speed;
         }
 
         if (keyboard.isDown(Phaser.KeyCode.RIGHT)) {
-            if (this.x + this.width < this.game.world.camera.width)
+            if (this.x + this.width/2 < this.game.world.camera.width)
                 this.x += this._speed;
         }
 
