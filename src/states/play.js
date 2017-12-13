@@ -2,7 +2,7 @@ class PlayState extends Phaser.State {
 
     
     create() {
-        
+        new Player(this.game) ;
     }
 
 
