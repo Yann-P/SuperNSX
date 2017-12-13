@@ -31,7 +31,7 @@ class PlayState extends Phaser.State {
 
         this._music = this.game.add.audio('Level01')
         this._music.loop = true;
-        //this._music.play(); // Uncomment if you don't want to keep your sanity
+        this._music.play(); // Uncomment if you don't want to keep your sanity
 
         this._upgradeSound = this.game.add.audio('WeaponChange');
         this._gameOverSound = this.game.add.audio('Loose');
