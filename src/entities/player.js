@@ -6,9 +6,21 @@ class Player extends Phaser.Sprite {
         super(game, 1000, 500, "Spaceship");
 
         this._speed = 10;
+        this.bombs = 2;
         this.anchor.setTo(0.5);
         this.game.add.existing(this);
         this.game.physics.arcade.enable(this);
+        this.emitter = new EventEmitter;
+
+        let fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        fireButton.onDown.add(this.launchBomb, this); 
+    }
+
+    launchBomb(){
+        if (this.bombs > 0) {
+            this.emitter.emit('superbomb')
+            this.bombs--;
+        }
     }
 
     update() {
@@ -33,6 +45,6 @@ class Player extends Phaser.Sprite {
             if (this.x + this.width < this.game.world.camera.width)
                 this.x += this._speed;
         }
+
     }
-    
 }
