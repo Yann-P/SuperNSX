@@ -83,7 +83,8 @@ class PlayState extends Phaser.State {
         this._healthUp.play();
     }
 
-    playerHit(){
+    playerHit(player, bullet){
+        this._enemyBullets.remove(bullet); 
         if (this._health == 0)
         {
             this._player.die(() => {
@@ -99,7 +100,7 @@ class PlayState extends Phaser.State {
         else{
             this._health--;
             this._hudHealth.setHealth(this._health);
-
+            let tween = this.game.add.tween(this._player).to({angle:360},500,"Linear",true)
         }
 
     }
