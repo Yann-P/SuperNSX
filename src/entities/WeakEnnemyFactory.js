@@ -9,7 +9,7 @@ class WeakEnnemyFactory extends IEnnemyFactory {
 		let enemy = new WeakEnnemy(game, x, y, lives, new SinePattern(
 			0.05, 
 			game.rnd.between(game.world.camera.width/5, 4*game.world.camera.width/5),
-			0,
+			game.rnd.between(0,2),
 			game.rnd.between(game.world.camera.width/5, 4*game.world.camera.width/5),
 		));
 		return enemy;
