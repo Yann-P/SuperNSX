@@ -6,8 +6,6 @@ class PlayState extends Phaser.State {
         this._hudBombs = new Bombs(this.game, this.game.width -50 , 50);
         this._hudHealth = new Health(this.game, 50 , 50);
         
-        new Player(this.game) ;
-
         this._weakEnnemyFactory = new WeakEnnemyFactory();
         this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1);
 
