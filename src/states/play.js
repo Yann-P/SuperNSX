@@ -7,8 +7,14 @@ class PlayState extends Phaser.State {
         this._hudHealth = new Health(this.game, 50 , 50);
         
         new Player(this.game) ;
+        this._player = new Player(this.game) ;
+        this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)))
+        
     }
 
+    bombExplosion() {
+        console.log("boum");
+    }
 
     update() {
         
