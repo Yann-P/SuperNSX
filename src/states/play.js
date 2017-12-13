@@ -4,6 +4,8 @@ class PlayState extends Phaser.State {
     create() {
         this._parallax = new Parallax(this.game, 1);
         new Player(this.game) ;
+        this._weakEnnemyFactory = new WeakEnnemyFactory();
+        this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1);
     }
 
 
