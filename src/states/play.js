@@ -21,7 +21,8 @@ class PlayState extends Phaser.State {
         //this._enemies.add(this._weakEnnemyFactory.CreateEnnemy(this.game, 100, 100, 0, 0, 1));
         //this._enemies.add(this._strongEnnemyFactory.CreateEnnemy(this.game, 300, 300, 5));
         
-        this._weapon = new SawGun(this.game);
+        //this._weapon = new SawGun(this.game);
+        this._weapon = new BasicGun(this.game);
 
         //this._weapon.disable(); // Uncomment if you want to test collisions
         
