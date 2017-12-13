@@ -83,6 +83,12 @@ class PlayState extends Phaser.State {
         this._hudHealth.setHealth(++this._health);
     }
 
+
+    addSawGun() {
+        this._unlockedWeapon.push(new SawGun(this.game));
+    }
+    
+
     playerDies(player, enemy){
         enemy.die()
         this._enemies.remove(enemy);        
