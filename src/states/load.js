@@ -15,9 +15,20 @@ class LoadState extends Phaser.State {
 
 
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        //this.game.load.image("systeme", "assets/systeme.png");
+        this.game.load.image("Background01", "assets/graphics/Background01.png");
+        this.game.load.image("Background02", "assets/graphics/Background02.png");
+        for(let i = 1; i <= 3; i++)
+            this.game.load.image("Bullet0" + i, "assets/graphics/Bullet0" + i + ".png");
+        for(let i = 1; i <= 3; i++)
+            this.game.load.image("Enemy0" + i, "assets/graphics/Enemy0" + i + ".png");
+        
+        this.game.load.image("Spaceship", "assets/graphics/Spaceship.png");
+        this.game.load.image("Spaceship01", "assets/graphics/Spaceship01.png");
+        this.game.load.image("Spaceship02", "assets/graphics/Spaceship02.png");
+        this.game.load.image("Logo", "assets/graphics/SuperNSX-logo.png");
+        
         //this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');        
-        //this.game.load.spritesheet("clone", "assets/spritesheet_clonage.png", 171, 303, 7);
+        this.game.load.spritesheet("Explosion01", "assets/graphics/Explosion01.png", 64, 64, 5);
        
     }
 
