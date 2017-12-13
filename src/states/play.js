@@ -7,7 +7,7 @@ class PlayState extends Phaser.State {
         this._enemies = new Enemies(this.game);
 
         this._drops = new Phaser.Group(this.game);
-        this._drops.add(new HealthDrop(this.game, 50, 50));
+        //this._drops.add(new HealthDrop(this.game, 50, 50));
 
         this._player = new Player(this.game, this.game.width / 2, this.game.height - 50, this._enemies) ;
         this._player.emitter.on("superbomb", (this.bombExplosion.bind(this)));
@@ -87,7 +87,12 @@ class PlayState extends Phaser.State {
     enemyDies(enemy, bullet){
         enemy.lives--;
         if(enemy.lives <= 0){
-            enemy.die()
+            let drop = enemy.die();
+
+            if (drop != null) {
+                this._drops.add(new WeaponDrop(this.game, drop.x, drop.y));
+            }
+            
             this._enemies.remove(enemy);
             this._playerBullets.remove(bullet);
         }

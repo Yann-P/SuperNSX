@@ -5,4 +5,8 @@ class StrongEnnemy extends IEnnemy {
 		this.anchor.set(0.5);
 	}
 
+	die() {
+		return super.die();
+		
+	}
 }

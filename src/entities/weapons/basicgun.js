@@ -38,7 +38,7 @@ class BasicGun extends Weapon{
 		};
 	}
 
-	upgradeWeapon(){
+	upgrade(){
 		if(this._upgradeLevel < this._maxLevel){
 			this._upgradeLevel++;
 		}
